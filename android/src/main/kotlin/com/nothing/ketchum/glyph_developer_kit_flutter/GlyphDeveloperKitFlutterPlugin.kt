@@ -83,7 +83,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
           "The GlyphManager was not able to be registered.\n" +
                   "Check the `AndroidManifest.xml` and make sure that the steps in the link below" +
                   " are followed:\n" +
-                  "https://github.com/Nothing-Developer-Programme/Glyph-Developer-Kit?tab=readme-ov-file#packagename-comnothingketchum",
+                  "https://github.com/ProgrammingPleb/Flutter-Glyph-Developer-Kit?tab=readme-ov-file#getting-started",
           null)
         return
       }
@@ -103,7 +103,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
           "The GlyphManager was not able to be registered.\n" +
                   "Check the `AndroidManifest.xml` and make sure that the steps in the link below" +
                   " are followed:\n" +
-                  "https://github.com/Nothing-Developer-Programme/Glyph-Developer-Kit?tab=readme-ov-file#packagename-comnothingketchum",
+                  "https://github.com/ProgrammingPleb/Flutter-Glyph-Developer-Kit?tab=readme-ov-file#getting-started",
           null)
         return
       }
@@ -123,7 +123,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
           "The GlyphManager was not able to be registered.\n" +
                   "Check the `AndroidManifest.xml` and make sure that the steps in the link below" +
                   " are followed:\n" +
-                  "https://github.com/Nothing-Developer-Programme/Glyph-Developer-Kit?tab=readme-ov-file#packagename-comnothingketchum",
+                  "https://github.com/ProgrammingPleb/Flutter-Glyph-Developer-Kit?tab=readme-ov-file#getting-started",
           null)
         return
       }
