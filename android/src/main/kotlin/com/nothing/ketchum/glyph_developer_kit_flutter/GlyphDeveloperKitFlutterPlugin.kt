@@ -64,6 +64,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
     } catch (e: GlyphException) {
       e.message?.let { Log.e(TAG, it) }
     }
+    glyphManager?.unInit();
   }
 
   // Flutter Calls
