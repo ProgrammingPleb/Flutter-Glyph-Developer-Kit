@@ -3,7 +3,6 @@ import 'package:logger/logger.dart';
 import 'package:glyph_developer_kit_flutter/exceptions.dart';
 import 'package:glyph_developer_kit_flutter/glyph_mappings/phone_1.dart';
 import 'package:glyph_developer_kit_flutter/glyph_mappings/phone_2.dart';
-import 'package:glyph_developer_kit_flutter/models/media_sessions.dart';
 
 class GlyphsPlatform {
   final _platform = const MethodChannel("com.nothing.ketchum/glyphs");
@@ -66,17 +65,6 @@ class GlyphsPlatform {
     } on PlatformException catch (e) {
       _logger.e(e.message, error: e);
     }
-  }
-
-  Future<PlayingMediaSessions> getMediaControls() async {
-    List<Object?> result = [];
-    try {
-      result = await _platform.invokeMethod("getMediaControls");
-    } on PlatformException catch (e) {
-      _logger.e(e.message, error: e);
-    }
-
-    return PlayingMediaSessions.fromMap(result);
   }
 }
 
