@@ -102,7 +102,7 @@ class _NothingGlyphsPageState extends State<NothingGlyphsPage> {
                 ]);
                 glyphData.toggleGlyphs();
               },
-              child: const Text("Turn On Section C Glyphs"),
+              child: const Text("Turn On Section C Glyphs - Phone (2)"),
             ),
             FilledButton(
               onPressed: () {
