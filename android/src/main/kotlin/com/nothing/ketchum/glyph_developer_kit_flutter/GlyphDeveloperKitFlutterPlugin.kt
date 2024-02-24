@@ -78,7 +78,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun toggleGlyph(call: MethodCall, result: MethodChannel.Result) {
     if (glyphManager != null) {
-      val glyphData = FlutterGlyphData(call)
+      val glyphData = FlutterGlyphFrame(call)
       if (glyphManager!!.glyphFrameBuilder == null) {
         result.error("GlyphPermissionsMissing",
           "The GlyphManager was not able to be registered.\n" +
@@ -98,7 +98,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun animateGlyph(call: MethodCall, result: MethodChannel.Result) {
     if (glyphManager != null) {
-      val glyphData = FlutterGlyphData(call)
+      val glyphData = FlutterGlyphFrame(call)
       if (glyphManager!!.glyphFrameBuilder == null) {
         result.error("GlyphPermissionsMissing",
           "The GlyphManager was not able to be registered.\n" +
@@ -118,7 +118,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun displayGlyphProgress(call: MethodCall, result: MethodChannel.Result) {
     if (glyphManager != null) {
-      val glyphData = FlutterGlyphData(call)
+      val glyphData = FlutterGlyphFrame(call)
       if (glyphManager!!.glyphFrameBuilder == null) {
         result.error("GlyphPermissionsMissing",
           "The GlyphManager was not able to be registered.\n" +

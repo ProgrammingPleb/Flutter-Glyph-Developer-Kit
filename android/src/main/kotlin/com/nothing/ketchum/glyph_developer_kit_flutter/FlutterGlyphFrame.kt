@@ -3,7 +3,7 @@ package com.nothing.ketchum.glyph_developer_kit_flutter
 import com.nothing.ketchum.GlyphFrame
 import io.flutter.plugin.common.MethodCall
 
-class FlutterGlyphData(call: MethodCall) {
+class FlutterGlyphFrame(call: MethodCall) {
     var period: Int? = null
     var cycles: Int? = null
     var interval: Int? = null

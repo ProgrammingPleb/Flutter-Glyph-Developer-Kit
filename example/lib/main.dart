@@ -92,7 +92,7 @@ class _NothingGlyphsPageState extends State<NothingGlyphsPage> {
             // Turns on the entire C section on the Nothing Phone (2)
             FilledButton(
               onPressed: () {
-                GlyphData glyphData = GlyphData(channels: [
+                GlyphFrame glyphFrame = GlyphFrame(channels: [
                   ...NP2GlyphMappings.C1Sections,
                   NP2GlyphMappings.C2,
                   NP2GlyphMappings.C3,
@@ -100,14 +100,14 @@ class _NothingGlyphsPageState extends State<NothingGlyphsPage> {
                   NP2GlyphMappings.C5,
                   NP2GlyphMappings.C6,
                 ]);
-                glyphData.toggleGlyphs();
+                glyphFrame.toggleGlyphs().onError(
               },
               child: const Text("Turn On Section C Glyphs - Phone (2)"),
             ),
             FilledButton(
               onPressed: () {
-                GlyphData glyphData = GlyphData(channels: []);
-                glyphData.toggleGlyphs();
+                GlyphFrame glyphData = GlyphFrame(channels: []);
+                glyphData.toggleGlyphs().onError(
               },
               child: const Text("Turn Off All Glyphs"),
             ),

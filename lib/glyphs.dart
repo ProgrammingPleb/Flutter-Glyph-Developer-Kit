@@ -32,35 +32,35 @@ class GlyphsPlatform {
     return result ?? false;
   }
 
-  Future<void> _toggleGlyphs(GlyphData glyphData) async {
+  Future<void> _toggleGlyphs(GlyphFrame glyphFrame) async {
     try {
       await _platform.invokeMethod<bool>("toggleGlyph", {
-        "channels": glyphData.channels,
+        "channels": glyphFrame.channels,
       });
     } on PlatformException catch (e) {
       _logger.e(e.message, error: e);
     }
   }
 
-  Future<void> _animateGlyphs(GlyphData glyphData) async {
+  Future<void> _animateGlyphs(GlyphFrame glyphFrame) async {
     try {
       await _platform.invokeMethod<bool>("animateGlyph", {
-        "period": glyphData.period,
-        "cycles": glyphData.cycles,
-        "interval": glyphData.interval,
-        "channels": glyphData.channels,
+        "period": glyphFrame.period,
+        "cycles": glyphFrame.cycles,
+        "interval": glyphFrame.interval,
+        "channels": glyphFrame.channels,
       });
     } on PlatformException catch (e) {
       _logger.e(e.message, error: e);
     }
   }
 
-  Future<void> _displayGlyphProgress(GlyphData glyphData) async {
+  Future<void> _displayGlyphProgress(GlyphFrame glyphFrame) async {
     try {
       await _platform.invokeMethod<bool>("displayGlyphProgress", {
-        "progress": glyphData.progress,
-        "reverse": glyphData.reverse,
-        "channels": glyphData.channels,
+        "progress": glyphFrame.progress,
+        "reverse": glyphFrame.reverse,
+        "channels": glyphFrame.channels,
       });
     } on PlatformException catch (e) {
       _logger.e(e.message, error: e);
@@ -68,7 +68,7 @@ class GlyphsPlatform {
   }
 }
 
-class GlyphData {
+class GlyphFrame {
   int? period;
   int? cycles;
   int? interval;
@@ -77,7 +77,7 @@ class GlyphData {
   List<int> channels;
   final GlyphsPlatform _platform = GlyphsPlatform();
 
-  GlyphData({
+  GlyphFrame({
     required this.channels,
     this.period,
     this.cycles,
@@ -162,7 +162,7 @@ class GlyphData {
     }
 
     _platform._displayGlyphProgress(
-      GlyphData(
+      GlyphFrame(
         channels: supportedSelectedChannels,
         progress: progress,
         reverse: reverse,
