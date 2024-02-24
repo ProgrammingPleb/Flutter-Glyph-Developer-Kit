@@ -66,6 +66,18 @@ class GlyphsPlatform {
       _logger.e(e.message, error: e);
     }
   }
+
+  Future<bool> _checkIfManagerInit() async {
+    bool isInit = false;
+
+    try {
+      isInit = await _platform.invokeMethod<bool>("isManagerInit") ?? false;
+    } on PlatformException catch (e) {
+      _logger.e(e.message, error: e);
+    }
+
+    return isInit;
+  }
 }
 
 class GlyphFrame {
@@ -86,11 +98,59 @@ class GlyphFrame {
     this.reverse = false,
   });
 
-  void toggleGlyphs() {
+  Future<String?> _checkChannelValidity() async {
+    bool isPhone1 = await _platform.checkIfNothingPhone1();
+    for (int channel in channels) {
+      if (channel > 32) {
+        String modelNum = isPhone1 ? "1" : "2";
+        return "The Nothing Phone ($modelNum) does not support channel "
+            "number $channel.\n"
+            "Consider checking if the channels given are supported on the "
+            "Nothing Phone $modelNum.\n"
+            "A possible solution is to use the NP${modelNum}GlyphMappings "
+            "class.";
+      }
+      if (channel > 14 && isPhone1) {
+        return "The Nothing Phone (1) does not support channel "
+            "number $channel.\n"
+            "Consider checking if the channels given are supported on the "
+            "Nothing Phone (1).";
+      }
+    }
+    return null;
+  }
+
+  Future<void> toggleGlyphs() async {
+    if (!await _platform._checkIfManagerInit()) {
+      throw GlyphManagerNotInit("The Glyph Manager was not initialized.\n\n"
+          "If you are the developer of this application, please report this to "
+          "the issue tab for this plugin:\nhttps://github.com/ProgrammingPleb/"
+          "Flutter-Glyph-Developer-Kit/issues\n"
+          "Do not report this to the official Glyph Developer Kit repository.");
+    }
+
+    String? errorMsg = await _checkChannelValidity();
+    if (errorMsg != null) {
+      throw GlyphChannelNotSupported(errorMsg);
+    }
+
     _platform._toggleGlyphs(this);
   }
 
-  void animateGlyphs() {
+  Future<void> animateGlyphs() async {
+    if (!await _platform._checkIfManagerInit()) {
+      throw GlyphManagerNotInit("The Glyph Manager was not initialized.\n\n"
+          "If you are the developer of this application, please report this to "
+          "the issue tab for this plugin:\nhttps://github.com/ProgrammingPleb/"
+          "Flutter-Glyph-Developer-Kit/issues\n"
+          "Do not report this to the official Glyph Developer Kit repository.");
+    }
+
+    String? errorMsg = await _checkChannelValidity();
+    if (errorMsg != null) {
+      throw GlyphChannelNotSupported(errorMsg);
+    }
+
     if (period == null && cycles == null && interval == null) {
       throw NoAnimationProperties(
           "There are no animation properties for this glyph.\n"
@@ -105,7 +165,15 @@ class GlyphFrame {
     _platform._animateGlyphs(this);
   }
 
-  void displayGlyphProgress() async {
+  Future<void> displayGlyphProgress() async {
+    if (!await _platform._checkIfManagerInit()) {
+      throw GlyphManagerNotInit("The Glyph Manager was not initialized.\n\n"
+          "If you are the developer of this application, please report this to "
+          "the issue tab for this plugin:\nhttps://github.com/ProgrammingPleb/"
+          "Flutter-Glyph-Developer-Kit/issues\n"
+          "Do not report this to the official Glyph Developer Kit repository.");
+    }
+
     bool nothingPhone1 = await _platform.checkIfNothingPhone1();
     bool nothingPhone2 = await _platform.checkIfNothingPhone2();
 

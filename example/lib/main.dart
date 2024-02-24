@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glyph_developer_kit_flutter/glyph_mappings/phone_2.dart';
 import 'package:glyph_developer_kit_flutter/glyphs.dart';
+import 'package:logger/logger.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,6 +42,7 @@ class NothingGlyphsPage extends StatefulWidget {
 
 class _NothingGlyphsPageState extends State<NothingGlyphsPage> {
   final GlyphsPlatform glyphs = GlyphsPlatform();
+  final Logger _logger = Logger();
 
   @override
   void initState() {
@@ -101,6 +103,9 @@ class _NothingGlyphsPageState extends State<NothingGlyphsPage> {
                   NP2GlyphMappings.C6,
                 ]);
                 glyphFrame.toggleGlyphs().onError(
+                      (error, stackTrace) =>
+                          _logger.e(error, stackTrace: stackTrace),
+                    );
               },
               child: const Text("Turn On Section C Glyphs - Phone (2)"),
             ),
@@ -108,6 +113,9 @@ class _NothingGlyphsPageState extends State<NothingGlyphsPage> {
               onPressed: () {
                 GlyphFrame glyphData = GlyphFrame(channels: []);
                 glyphData.toggleGlyphs().onError(
+                      (error, stackTrace) =>
+                          _logger.e(error, stackTrace: stackTrace),
+                    );
               },
               child: const Text("Turn Off All Glyphs"),
             ),

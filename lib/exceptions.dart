@@ -42,3 +42,12 @@ class InvalidGlyphProgressChannel implements Exception {
   @override
   String toString() => 'InvalidGlyphProgressChannel: $message';
 }
+
+class GlyphManagerNotInit implements Exception {
+  final String message;
+
+  GlyphManagerNotInit(this.message);
+
+  @override
+  String toString() => 'GlyphManagerNotInit: $message';
+}

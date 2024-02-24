@@ -42,6 +42,9 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
       call.method.equals("isNothingPhone2") -> {
         checkIs22111(result)
       }
+      call.method.equals("isManagerInit") -> {
+        checkIfManagerInit(result)
+      }
       call.method.equals("toggleGlyph") -> {
         toggleGlyph(call, result)
       }
@@ -74,6 +77,10 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun checkIs22111(result: Result) {
     result.success(Common.is22111())
+  }
+
+  private fun checkIfManagerInit(result: Result) {
+    result.success(glyphManager != null)
   }
 
   private fun toggleGlyph(call: MethodCall, result: Result) {
