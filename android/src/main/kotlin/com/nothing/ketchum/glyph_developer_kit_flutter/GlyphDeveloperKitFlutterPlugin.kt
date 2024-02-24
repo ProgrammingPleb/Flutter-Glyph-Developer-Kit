@@ -20,12 +20,12 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
   /// when the Flutter Engine is detached from the Activity
   private lateinit var channel : MethodChannel
   private var applicationContext: Context? = null
-  private val TAG = "NothingGlyphs";
-  private var glyphManager: GlyphManager? = null;
-  private var glyphCallback: GlyphManager.Callback? = null;
+  private val logTag = "NothingGlyphs"
+  private var glyphManager: GlyphManager? = null
+  private var glyphCallback: GlyphManager.Callback? = null
 
   override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    this.applicationContext = flutterPluginBinding.applicationContext;
+    this.applicationContext = flutterPluginBinding.applicationContext
     channel = MethodChannel(flutterPluginBinding.binaryMessenger,
       "com.nothing.ketchum/glyphs")
     channel.setMethodCallHandler(this)
@@ -62,21 +62,21 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
     try {
       glyphManager?.closeSession()
     } catch (e: GlyphException) {
-      e.message?.let { Log.e(TAG, it) }
+      e.message?.let { Log.e(logTag, it) }
     }
-    glyphManager?.unInit();
+    glyphManager?.unInit()
   }
 
   // Flutter Calls
-  private fun checkIs20111(result: MethodChannel.Result) {
+  private fun checkIs20111(result: Result) {
     result.success(Common.is20111())
   }
 
-  private fun checkIs22111(result: MethodChannel.Result) {
+  private fun checkIs22111(result: Result) {
     result.success(Common.is22111())
   }
 
-  private fun toggleGlyph(call: MethodCall, result: MethodChannel.Result) {
+  private fun toggleGlyph(call: MethodCall, result: Result) {
     if (glyphManager != null) {
       val glyphData = FlutterGlyphFrame(call)
       if (glyphManager!!.glyphFrameBuilder == null) {
@@ -96,7 +96,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
       null)
   }
 
-  private fun animateGlyph(call: MethodCall, result: MethodChannel.Result) {
+  private fun animateGlyph(call: MethodCall, result: Result) {
     if (glyphManager != null) {
       val glyphData = FlutterGlyphFrame(call)
       if (glyphManager!!.glyphFrameBuilder == null) {
@@ -116,7 +116,7 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
       null)
   }
 
-  private fun displayGlyphProgress(call: MethodCall, result: MethodChannel.Result) {
+  private fun displayGlyphProgress(call: MethodCall, result: Result) {
     if (glyphManager != null) {
       val glyphData = FlutterGlyphFrame(call)
       if (glyphManager!!.glyphFrameBuilder == null) {
@@ -144,13 +144,13 @@ class GlyphDeveloperKitFlutterPlugin: FlutterPlugin, MethodCallHandler {
   private fun initGlyphs() {
     glyphCallback = object : GlyphManager.Callback {
       override fun onServiceConnected(componentName: ComponentName?) {
-        Log.d(TAG, "Glyph Service Connected")
+        Log.d(logTag, "Glyph Service Connected")
         if (Common.is20111()) glyphManager?.register(Common.DEVICE_20111)
         if (Common.is22111()) glyphManager?.register(Common.DEVICE_22111)
         try {
           glyphManager?.openSession()
         } catch (e: GlyphException) {
-          e.message?.let { Log.e(TAG, it) }
+          e.message?.let { Log.e(logTag, it) }
         }
       }
 
